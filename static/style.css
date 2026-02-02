@@ -1,0 +1,122 @@
+/* Style général */
+body {
+  font-family: Arial, sans-serif;
+  background: #f6f7fb;
+  margin: 0;
+  padding: 0;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+h1 {
+  margin-top: 0;
+}
+
+/* Formulaire */
+.form-group {
+  margin-bottom: 14px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+}
+
+input[type="number"]:focus {
+  border-color: #2563eb;
+}
+
+/* Bouton */
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  opacity: 0.92;
+}
+
+/* Résultats */
+.result {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+}
+
+/* Liens */
+a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Tableau historique */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+th {
+  background: #111827;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.small-note {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 14px;
+}
+
+.cat-normal {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.cat-surpoids {
+  color: #ea580c;
+  font-weight: 700;
+}
+
+.cat-obesite {
+  color: #dc2626;
+  font-weight: 700;
+}

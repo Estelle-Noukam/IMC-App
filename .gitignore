@@ -1,0 +1,12 @@
+# Environnement virtuel
+venv/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Base de données SQLite (données locales)
+imc.db
+
+# Fichiers système
+.DS_Store

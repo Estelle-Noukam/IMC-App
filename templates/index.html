@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculateur IMC</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Calculateur IMC</h1>
+
+    <form method="post">
+      <div class="form-group">
+        <label>Taille (cm)</label>
+        <input type="number" name="taille" step="0.1" required value="{{ taille_cm }}">
+      </div>
+
+      <div class="form-group">
+        <label>Poids (kg)</label>
+        <input type="number" name="poids" step="0.1" required value="{{ poids_kg }}">
+      </div>
+
+      <button type="submit">Calculer</button>
+      <a href="/historique" style="margin-left:12px;">Voir l’historique</a>
+    </form>
+
+    {% if imc_value is not none or categorie %}
+  <div class="result">
+    {% if imc_value is not none %}
+      <h2>IMC : {{ imc_value }}</h2>
+    {% endif %}
+
+    {% if categorie %}
+      {% set cat_class = 
+        'cat-normal' if 'normale' in categorie.lower()
+        else 'cat-surpoids' if 'surpoids' in categorie.lower()
+        else 'cat-obesite'
+      %}
+      <h3 class="{{ cat_class }}">Catégorie : {{ categorie }}</h3>
+    {% endif %}
+  </div>
+{% endif %}
+
+    <p class="small-note">
+      L’IMC est un indicateur approximatif et ne remplace pas un avis médical.
+    </p>
+  </div>
+</body>
+</html>
+

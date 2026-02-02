@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Historique IMC</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Historique des calculs IMC</h1>
+
+    <a href="/">← Retour</a>
+
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Taille (cm)</th>
+        <th>Poids (kg)</th>
+        <th>IMC</th>
+        <th>Catégorie</th>
+      </tr>
+
+      {% for r in records %}
+      <tr>
+        <td>{{ r[5] }}</td>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        
+        <td>
+          {% set cat_class =
+           'cat-normal' if 'normale' in r[4].lower()
+           else 'cat-surpoids' if 'surpoids' in r[4].lower()
+           else 'cat-obesite'
+          %}
+          <span class="{{ cat_class }}">{{ r[4] }}</span>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p class="small-note">
+      Astuce : l’historique est sauvegardé dans la base SQLite (imc.db).
+    </p>
+  </div>
+</body>
+</html>
+
