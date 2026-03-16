@@ -1,21 +1,11 @@
 from flask import Flask, request, render_template
-import sqlite3
-from database import init_db
+from database import init_db, insert_record, get_connection
 
 app = Flask(__name__)
 
-# Initialisation de la base au démarrage
+# Initialisation de la base MySQL au démarrage
 init_db()
 
-def save_record(taille, poids, imc, categorie):
-    conn = sqlite3.connect("imc.db")
-    cursor = conn.cursor()
-    cursor.execute(
-        "INSERT INTO imc_records (taille_cm, poids_kg, imc, categorie) VALUES (?, ?, ?, ?)",
-        (taille, poids, imc, categorie)
-    )
-    conn.commit()
-    conn.close()
 
 @app.route("/", methods=["GET", "POST"])
 def imc():
@@ -44,10 +34,10 @@ def imc():
             else:
                 categorie = "Obésité"
 
-            # 🔹 Sauvegarde en base
-            save_record(t, p, imc_value, categorie)
+            # Sauvegarde en base MySQL
+            insert_record(t, p, imc_value, categorie)
 
-        except:
+        except Exception:
             categorie = "Erreur dans les valeurs saisies"
 
     return render_template(
@@ -58,14 +48,18 @@ def imc():
         categorie=categorie
     )
 
+
 @app.route("/historique")
 def historique():
-    conn = sqlite3.connect("imc.db")
+    conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM imc_records ORDER BY created_at DESC")
     records = cursor.fetchall()
     conn.close()
 
     return render_template("historique.html", records=records)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
